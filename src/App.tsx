@@ -1,5 +1,5 @@
 // App.tsx
-import {Route,Routes} from "react-router";
+import {Route,Routes} from "react-router-dom";
 import RootLayout from "./layouts/RootRayout.tsx";
 import Home from "./pages/Home.tsx";
 import Auth from "./pages/Auth.tsx";
