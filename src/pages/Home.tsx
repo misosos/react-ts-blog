@@ -1,7 +1,12 @@
-export default function  Home(){
+// src/pages/Home.tsx
+import HomeSearchSection from "../components/home/HomeSearchSection";
+import HomePostsSection from "../components/home/HomePostsSection";
+
+export default function Home() {
     return (
-        <div>
-            <h3>Home</h3>
-        </div>
-    )
+        <main className="px-4 py-6">
+            <HomeSearchSection />
+            <HomePostsSection />
+        </main>
+    );
 }
