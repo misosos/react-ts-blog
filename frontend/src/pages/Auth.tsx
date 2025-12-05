@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // axiosInstance 경로는 실제 프로젝트 구조에 맞게 수정해 주세요.
 import { axiosInstance } from "../api/axiosInstance";
+import { useAuthStore } from "../stores/useAuthStore";
 
 type PageType = "login" | "signup";
 
@@ -16,6 +17,7 @@ export default function Auth() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
+  const { setAuth } = useAuthStore();
 
   const resetForm = () => {
     setEmail("");
@@ -91,7 +93,11 @@ export default function Auth() {
       });
 
       console.log("login success:", data);
-      // TODO: 받은 토큰/유저 정보를 전역 상태(zustand 등)나 localStorage에 저장
+
+      // 백엔드에서 내려주는 형태:
+      // { user: { username, email }, accessToken }
+      setAuth(data.user, data.accessToken);
+
       navigate("/");
     } catch (error: unknown) {
       console.error(error);
@@ -223,7 +229,7 @@ export default function Auth() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
-                placeholder="8자 이상 비밀번호"
+                placeholder="비밀번호"
               />
             </label>
 
